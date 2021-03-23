@@ -13,15 +13,19 @@
     
   </ul>
   <script>
+    // let station = 'AIGUELONGUE'
+    let station = window.location.pathname.replace('/station/', '')
+    console.log(station)
     let ul = document.querySelector('ul#stations')
-    fetch('/api/station/{{station}}').then(data => {
+    fetch(`/api/station/${station}`).then(data => {
       data.json().then(json => {
         console.log(json)
         json.forEach(station => {
-          let li = document.createElement('li')
-          li.innerHTML = `${station.route_short_name}`
-
-          ul.append(li)
+          let div = document.createElement('div')
+          div.innerHTML = `<ul>
+            <li>L${station.route_short_name} ${station.trip_headsign} ${station.delay_sec}</li>
+            </ul>`
+          ul.append(div)
         })
 
       })

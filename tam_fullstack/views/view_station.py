@@ -11,7 +11,7 @@ def view(station):
     if line['stop_name'] == station:
       data.append({'route_short_name': line['route_short_name'],
                     'trip_headsign': line['trip_headsign'],
-                    'delay_sec': line['delay_sec'],
+                    'delay_sec': round(int(line['delay_sec']) / 60),
                     'is_theorical': line['is_theorical']
                   })
   return jsonify(data)
