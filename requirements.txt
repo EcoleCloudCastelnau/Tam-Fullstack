@@ -6,3 +6,4 @@ python-dotenv
 requests
 rich
 gunicorn
+pytest

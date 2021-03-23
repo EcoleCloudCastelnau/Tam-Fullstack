@@ -1,8 +1,9 @@
 from fixtures import client
 
 
-def test_empty_db(client):
+def test_index(client):
   """Start with a blank database."""
 
   rv = client.get('/')
-  assert b'Hello World !' in rv.data
+  assert b'Next Departure' in rv.data
+  assert b'Stations List' in rv.data

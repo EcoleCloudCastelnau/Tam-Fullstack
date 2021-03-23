@@ -3,18 +3,18 @@ import tempfile
 
 import pytest
 
-import castelcloud
+import tam_fullstack
 
 
 @pytest.fixture
 def client():
-  db_fd, castelcloud.app.config['DATABASE'] = tempfile.mkstemp()
-  castelcloud.app.config['TESTING'] = True
+  # db_fd, app.config['DATABASE'] = tempfile.mkstemp()
+  app = tam_fullstack.create_app('TESTING')
+  app.config['TESTING'] = True
 
-  with castelcloud.app.test_client() as client:
-    with castelcloud.app.app_context():
-      castelcloud.init_db()
+  with app.test_client() as client:
+    # with app.app_context():
     yield client
 
-  os.close(db_fd)
-  os.unlink(castelcloud.app.config['DATABASE'])
+  # os.close(db_fd)
+  # os.unlink(app.config['DATABASE'])
