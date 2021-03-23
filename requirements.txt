@@ -1,0 +1,8 @@
+flask
+loguru
+psycopg2-binary
+PyGithub
+python-dotenv
+requests
+rich
+gunicorn
