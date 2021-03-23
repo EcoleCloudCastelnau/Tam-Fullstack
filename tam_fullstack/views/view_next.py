@@ -17,8 +17,5 @@ def view():
     if line['stop_name'] == station:
         if line['trip_headsign'] == direction:
           if line['route_short_name'] == route_short_name:
-            data['route_short_name'] = line['route_short_name']
-            data['trip_headsign'] = line['trip_headsign']
-            data['delay_sec'] = line['delay_sec']
-            data['is_theorical'] = line['is_theorical']
+            data['delay'] = round(int(line['delay_sec']) / 60) 
   return data
