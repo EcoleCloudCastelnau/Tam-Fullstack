@@ -7,11 +7,11 @@ def view(station):
   csv = download_csv()
   data = []
 
-  for line in parse_csv(csv):
-    if line['stop_name'] == station:
-      data.append({'route_short_name': line['route_short_name'],
-                    'trip_headsign': line['trip_headsign'],
-                    'delay_sec': round(int(line['delay_sec']) / 60),
-                    'is_theorical': line['is_theorical']
+  for row in parse_csv(csv):
+    if row['stop_name'] == station:
+      data.append({'route_short_name': row['route_short_name'],
+                    'trip_headsign': row['trip_headsign'],
+                    'delay_min': round(int(row['delay_sec']) / 60),
+                    'is_theorical': row['is_theorical']
                   })
   return jsonify(data)

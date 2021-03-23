@@ -4,4 +4,4 @@ route = '/stations'
 disabled = False
 
 def view():
-    return render_template('stations.html')
+    return render_template('list_stations.html')

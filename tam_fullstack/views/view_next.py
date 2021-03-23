@@ -8,14 +8,14 @@ def view():
   data = {}
 
   route_short_name = request.args.get('route_short_name')
-  station = request.args.get('station')
-  direction = request.args.get('direction')
+  stop_name = request.args.get('stop_name')
+  trip_headsign = request.args.get('trip_headsign')
 
-  print(route_short_name, station, direction)
+  print(route_short_name, stop_name, trip_headsign)
 
-  for line in parse_csv(csv):
-    if line['stop_name'] == station:
-        if line['trip_headsign'] == direction:
-          if line['route_short_name'] == route_short_name:
-            data['delay'] = round(int(line['delay_sec']) / 60) 
+  for row in parse_csv(csv):
+    if row['stop_name'] == stop_name:
+        if row['trip_headsign'] == trip_headsign:
+          if row['route_short_name'] == route_short_name:
+            data['delay_min'] = round(int(row['delay_sec']) / 60)
   return data

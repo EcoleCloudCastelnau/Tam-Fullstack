@@ -7,8 +7,8 @@ def view():
   csv = download_csv()
   stations = set()
 
-  for line in parse_csv(csv):
-    stations.add(line['stop_name'])
+  for row in parse_csv(csv):
+    stations.add(row['stop_name'])
 
   stations = list(stations)
   stations.sort()

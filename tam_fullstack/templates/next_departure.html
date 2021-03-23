@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MyTransports</title>
+  
+</head>
+<body>
+    <form action="" method="GET">
+        <input type="text" name="route_short_name" placeholder="route_short_name">
+        <input type="text" name="stop_name" placeholder="stop_name">
+        <input type="text" name="trip_headsign" placeholder="trip_headsign">
+        <button type="submit">Envoyer</button>
+    </form>
+    <div id="next">
+    </div>
+  <script>
+    //   Fetch query params from inputs
+    let params = (new URL(document.location)).searchParams;
+    let route_short_name = params.get('route_short_name'); 
+    let stop_name = params.get('stop_name');
+    let trip_headsign = params.get('trip_headsign');
+
+    if (route_short_name != null) {
+      document.querySelector('input[name=route_short_name]').setAttribute('value', route_short_name)
+    }
+
+    if (stop_name != null) {
+      document.querySelector('input[name=stop_name]').setAttribute('value', stop_name)
+    }
+
+    if (trip_headsign != null) {
+      document.querySelector('input[name=trip_headsign]').setAttribute('value', trip_headsign)
+    }
+    // start building next request params
+    const fetchParams = {route_short_name, stop_name, trip_headsign}
+    const urlParams = new URLSearchParams(Object.entries(fetchParams))
+    
+
+    fetch(`/api/next?` + urlParams).then(data => {
+      data.json().then(json => {
+        console.log(json)
+        
+        let element = document.querySelector('#next');
+        let h3 = document.createElement('h3');
+
+        if (json.delay_min != undefined) {
+          h3.innerText = `Next departure is in ${json.delay_min} minutes`
+        } else {
+          h3.innerText = `Couldn't find any departure`
+        }
+
+        element.appendChild(h3);
+        
+      })
+    })
+  </script>
+</body>
+</html>

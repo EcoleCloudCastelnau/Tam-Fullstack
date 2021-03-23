@@ -23,7 +23,7 @@
         json.forEach(station => {
           let div = document.createElement('div')
           div.innerHTML = `<ul>
-            <li>L${station.route_short_name} ${station.trip_headsign} ${station.delay_sec}</li>
+            <li>L${station.route_short_name} ${station.trip_headsign} ${station.delay_min}</li>
             </ul>`
           ul.append(div)
         })
